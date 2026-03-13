@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Bluetooth Settings
+Exec=float-run bluetui
+Icon=bluetooth
+Type=Application
+Terminal=false
+Categories=Settings;System;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install Package
+Exec=float-run pkg-install
+Icon=system-software-install
+Type=Application
+Terminal=false
+Categories=Settings;System;

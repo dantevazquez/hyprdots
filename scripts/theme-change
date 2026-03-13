@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# 1. Input Validation
+if [ -z "$1" ]; then
+    echo "Usage: $0 <theme_folder_name>"
+    exit 1
+fi
+
+THEME_NAME="$1"
+
+# 2. Define Paths
+THEME_BASE_DIR="/home/dante/.config/theme"
+THEME_SOURCE_DIR="${THEME_BASE_DIR}/${THEME_NAME}"
+THEME_CURRENT_DIR="${THEME_BASE_DIR}/current"
+
+NVIM_PLUGIN_DIR="/home/dante/.config/nvim/lua/plugins"
+BTOP_THEME_DIR="/home/dante/.config/btop/themes"
+
+# 3. Safety Warning
+echo "This script will switch your theme to '$THEME_NAME' and restart Hyprland."
+echo "Any unsaved work will be lost. Proceed? (y/n)"
+read -r response
+
+if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    echo "Operation cancelled."
+    exit 0
+fi
+
+# 4. Check if the specified theme exists
+if [ ! -d "$THEME_SOURCE_DIR" ]; then
+    echo "Error: Theme folder '$THEME_SOURCE_DIR' does not exist."
+    exit 1
+fi
+
+echo "Switching theme to: $THEME_NAME..."
+
+# 5. Update the 'current' theme folder
+# Safety: Ensure current exists, then empty it, then copy.
+mkdir -p "$THEME_CURRENT_DIR"
+rm -rf "${THEME_CURRENT_DIR:?}"/*
+# FIXED: Moved to its own line
+cp -r "$THEME_SOURCE_DIR/"* "$THEME_CURRENT_DIR/"
+
+# 6. Neovim Theme Update
+if [ -f "$THEME_CURRENT_DIR/colorscheme.lua" ]; then
+    mkdir -p "$NVIM_PLUGIN_DIR"
+    cp "$THEME_CURRENT_DIR/colorscheme.lua" "$NVIM_PLUGIN_DIR/colorscheme.lua"
+    echo "-> Neovim theme updated."
+fi
+
+# 7. Btop Theme Update
+if [ -f "$THEME_CURRENT_DIR/btop.theme" ]; then
+    mkdir -p "$BTOP_THEME_DIR"
+    cp "$THEME_CURRENT_DIR/btop.theme" "$BTOP_THEME_DIR/btop.theme"
+    echo "-> Btop theme updated."
+fi
+
+# 8. Chromium Theme Update
+CHROMIUM_THEME="$THEME_CURRENT_DIR/chromium.theme"
+if [[ -f $CHROMIUM_THEME ]]; then
+    THEME_RGB_COLOR=$(<$CHROMIUM_THEME)
+    THEME_HEX_COLOR=$(printf '#%02x%02x%02x' ${THEME_RGB_COLOR//,/ })
+else
+    THEME_HEX_COLOR="#1c2027"
+fi
+
+echo "{\"BrowserThemeColor\": \"$THEME_HEX_COLOR\"}" | sudo tee "/etc/chromium/policies/managed/color.json" >/dev/null
+chromium --refresh-platform-policy --no-startup-window >/dev/null
+
+# 9. Exit
+echo "Theme switch complete! Exiting Hyprland..."
+sleep 1
+hyprctl dispatch exit

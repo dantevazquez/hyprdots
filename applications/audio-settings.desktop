@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Audio Settings
+Exec=float-run wiremix
+Icon=audio-card
+Type=Application
+Terminal=false
+Categories=Settings;System;

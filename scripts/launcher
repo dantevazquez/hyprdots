@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Define the directories containing your desktop entries
+LOCAL_APP_DIR="$HOME/.local/share/applications"
+SYSTEM_APP_DIR="/usr/share/applications"
+
+# 1. Find all .desktop files in both directories (suppressing permission errors)
+# 2. Extract the Name= line
+# 3. Format as "filepath|App Name" and pipe to fzf
+selected_file=$(find "$LOCAL_APP_DIR" "$SYSTEM_APP_DIR" -name "*.desktop" -type f 2>/dev/null | while read -r file; do
+    # Get the first Name= occurrence and strip the prefix
+    name=$(grep -m 1 "^Name=" "$file" | cut -d= -f2-)
+    
+    # Only echo if a name was actually found
+    if [ -n "$name" ]; then
+        echo "$file|$name"
+    fi
+done | fzf --delimiter="|" --with-nth=2 \
+           --prompt="Launch  " \
+           --layout=reverse \
+           --color="pointer:green, marker:green" \
+| cut -d"|" -f1)
+
+# Exit gracefully if you press Esc and no application is selected
+[ -z "$selected_file" ] && exit 0
+
+# Extract the Exec= line
+# The sed command strips out standard XDG arguments like %U, %F, %k, etc.
+exec_cmd=$(grep -m 1 "^Exec=" "$selected_file" | cut -d= -f2- | sed 's/ %[a-zA-Z]//g')
+
+# Launch the application natively via Hyprland
+hyprctl dispatch exec "$exec_cmd"

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Wi-Fi Settings
+Exec=float-run impala
+Icon=network-wireless
+Type=Application
+Terminal=false
+Categories=Settings;System;

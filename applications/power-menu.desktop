@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Power Menu
+Exec=float-run power-menu
+Icon=system-shutdown
+Type=Application
+Terminal=false
+Categories=Settings;System;

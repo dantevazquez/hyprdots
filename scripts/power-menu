@@ -1,0 +1,19 @@
+#!/bin/bash
+actions="Lock Screen
+Reboot
+Shutdown"
+selected=$(echo "$actions" | gum filter --height 20 --header "Power Menu") || exit 1
+
+if [[ -n "$selected" ]]; then
+  case "$selected" in
+    "Lock Screen")
+     hyprctl dispatch exec hyprlock
+      ;;
+    "Reboot")
+      reboot
+      ;;
+    "Shutdown")
+      systemctl poweroff  
+      ;;
+  esac
+fi

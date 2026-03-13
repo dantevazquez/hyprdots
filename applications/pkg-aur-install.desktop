@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Install AUR Package
+Exec=float-run pkg-aur-install
+Icon=system-software-install
+Type=Application
+Terminal=false
+Categories=Settings;System;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Remove Package
+Exec=float-run pkg-remove
+Icon=system-software-package-manager
+Type=Application
+Terminal=false
+Categories=Settings;System;

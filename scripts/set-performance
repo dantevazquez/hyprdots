@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Show a fuzzy-finder TUI for picking Power Profiles.
+
+# Get current profile to display in the header
+current_profile=$(powerprofilesctl get)
+
+fzf_args=(
+  --header="Current Profile: $current_profile"
+  --preview 'echo "Select to apply: {}"'
+  --preview-label='enter: execute action ctrl+q: exit'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --color 'pointer:green,marker:green'
+)
+
+# Use omarchy-powerprofiles-list to get options
+profile=$(powerprofiles-list | fzf "${fzf_args[@]}")
+
+if [[ -n "$profile" ]]; then
+  # Set the selected profile
+  powerprofilesctl set "$profile"
+
+fi
