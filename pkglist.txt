@@ -64,3 +64,4 @@ xdg-desktop-portal-hyprland
 zram-generator
 wayfreeze-git
 xdg-terminal-exec
+snappy-switcher

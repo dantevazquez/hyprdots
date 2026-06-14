@@ -1,17 +1,17 @@
 :root {
-    --border-color: rgba(75, 75, 90, 0.8);
-    --border-color-active: rgba(189, 147, 249, 0.9);
+    --border-color: rgba(98, 104, 128, 0.8);
+    --border-color-active: rgba(202, 158, 230, 0.9);
 
-    --bg-color: rgba(40, 42, 54, 0.8);
-    --bg-color-hover: rgba(53, 55, 70, 0.9);
+    --bg-color: rgba(48, 52, 70, 0.8);
+    --bg-color-hover: rgba(65, 69, 89, 0.9);
 
     --border-radius: 5px;
     --border-size: 3px;
     --border-style: solid;
 
-    --text-color: rgba(248, 248, 242, 1);
+    --text-color: rgba(198, 208, 245, 1);
 
     --window-padding: 2px;
-    --bg-window-color: rgba(42, 47, 66, 0.95);
+    --bg-window-color: rgba(41, 45, 60, 0.95);
     font-family: "JetBrainsMono Nerd Font";
 }

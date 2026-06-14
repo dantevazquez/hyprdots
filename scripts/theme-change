@@ -15,6 +15,7 @@ THEME_CURRENT_DIR="${THEME_BASE_DIR}/current"
 
 NVIM_PLUGIN_DIR="/home/dante/.config/nvim/lua/plugins"
 BTOP_THEME_DIR="/home/dante/.config/btop/themes"
+SNAPPY_THEME_DIR="/home/dante/.config/snappy-switcher/themes"
 
 # 3. Safety Warning
 echo "This script will switch your theme to '$THEME_NAME' and restart Hyprland."
@@ -53,6 +54,14 @@ if [ -f "$THEME_CURRENT_DIR/btop.theme" ]; then
     mkdir -p "$BTOP_THEME_DIR"
     cp "$THEME_CURRENT_DIR/btop.theme" "$BTOP_THEME_DIR/btop.theme"
     echo "-> Btop theme updated."
+fi
+
+
+# Snappy Switcher Theme 
+if [ -f "$THEME_CURRENT_DIR/snappy.ini" ]; then
+    mkdir -p "$SNAPPY_THEME_DIR"
+    cp "$THEME_CURRENT_DIR/snappy.ini" "$SNAPPY_THEME_DIR/snappy.ini"
+    echo "-> Snappy theme updated."
 fi
 
 # 8. Chromium Theme Update
