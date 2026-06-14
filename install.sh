@@ -25,7 +25,7 @@ if [ -f "$PKGLIST" ]; then
   yay -S --needed --noconfirm - <"$PKGLIST"
 fi
 
-configs=("alacritty" "btop" "hypr" "hyprshell" "mako" "swayosd" "waybar")
+configs=("alacritty" "btop" "hypr" "hyprshell" "mako" "swayosd" "waybar" "snappy-switcher")
 echo "🔗 Symlinking .config folders..."
 mkdir -p "$CONFIG_DIR"
 for folder in "${configs[@]}"; do
