@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: float-run <command>"
+    exit 1
+fi
+
+foot --app-id=floating_tui "$@"
