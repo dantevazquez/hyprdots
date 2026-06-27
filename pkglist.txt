@@ -43,7 +43,6 @@ pipewire-jack
 pipewire-pulse
 polkit-gnome
 power-profiles-daemon
-ruff-lsp
 satty
 slurp
 snappy-switcher
@@ -64,6 +63,5 @@ wl-clipboard
 wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
-xdg-terminal-exec
 yay
 zram-generator
