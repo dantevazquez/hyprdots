@@ -45,7 +45,6 @@ polkit-gnome
 power-profiles-daemon
 satty
 slurp
-snappy-switcher
 sof-firmware
 sudo
 swayosd
