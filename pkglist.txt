@@ -59,7 +59,6 @@ wev
 wiremix
 wireplumber
 wl-clipboard
-wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 yay
